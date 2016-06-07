@@ -1,0 +1,33 @@
+{
+    "name": "mouf/utils.cache.psr6-ui",
+    "description": "This package contains a user interface that will add a 'Purge PSR-6 cache' button to Mouf, allowing you to purge any PSR-6 cache pool easily.",
+    "keywords": ["mouf", "cache", "psr-6"],
+    "homepage": "https://github.com/thecodingmachine/utils.cache.psr6-ui",
+    "type": "mouf-library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Négrier",
+            "email": "d.negrier@thecodingmachine.com",
+            "homepage": "http://mouf-php.com"
+        }
+    ],
+    "require": {
+    	"php": ">=5.3.0",
+        "mouf/utils.composite-exception": "~1.0",
+        "psr/cache" : "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mouf\\Utils\\Cache\\Psr": "src/Mouf/Utils/Cache/Psr"
+        }
+    },
+    "extra": {
+    	"mouf": {
+    		"require-admin": [
+    			"CacheAdmin.php"
+    		],
+    		"logo": "logo.png"
+    	}
+    }
+}
