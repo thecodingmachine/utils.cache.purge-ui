@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mouf\\Utils\\Cache\\Psr": "src/Mouf/Utils/Cache/Psr"
+            "Mouf\\Utils\\Cache\\Psr\\": "src/Mouf/Utils/Cache/Psr"
         }
     },
     "extra": {
