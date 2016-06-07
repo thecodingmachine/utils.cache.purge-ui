@@ -63,7 +63,7 @@ class PurgeCacheController extends Controller
         $menu->setIsActive(true);
         $this->name = $name;
         $cacheService = new InstanceProxy($name, $selfedit == 'true');
-        $cacheService->purgeAll();
+        $cacheService->clear();
 
         $this->selfedit = $selfedit;
         $this->content->addFile(__DIR__.'/../../../../../../views/purgeInstanceDone.php', $this);

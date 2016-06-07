@@ -8,12 +8,12 @@ use Mouf\MoufUtils;
 // PurgeCacheController classes. We must be sure to load the right one.
 // So instead of relying on the autoloader that will favor the class in Mouf admin, we force the
 // loading of the class.
-require_once 'src/Mouf/Utils/Cache/Admin/Controllers/PurgeCacheController.php';
+require_once 'src/Mouf/Utils/Cache/Psr/Admin/Controllers/PurgeCacheController.php';
 
 MoufUtils::registerMainMenu('utilsMainMenu', 'Utils', null, 'mainMenu', 200);
 MoufUtils::registerMenuItem('utilsCacheInterfaceMenu', 'Cache management', null, 'utilsMainMenu', 50);
-MoufUtils::registerMenuItem('utilsCachePsr6PurgeAllCachesMenuItem', 'Purge all caches', 'purgePsr6Caches/', 'utilsCacheInterfaceMenu', 10);
-MoufUtils::registerChooseInstanceMenuItem('utilsCachePsr6PurgeOneCacheMenuItem', 'Purge a cache instance', 'purgePsr6CacheInstance/', 'Psr\\Cache\\CacheItemPoolInterface', 'utilsCacheInterfaceMenu', 10);
+MoufUtils::registerMenuItem('utilsCachePsr6PurgeAllCachesMenuItem', 'Purge all PSR-6 cache pools', 'purgePsr6Caches/', 'utilsCacheInterfaceMenu', 10);
+MoufUtils::registerChooseInstanceMenuItem('utilsCachePsr6PurgeOneCacheMenuItem', 'Purge a PSR-6 cache pool instance', 'purgePsr6CacheInstance/', 'Psr\\Cache\\CacheItemPoolInterface', 'utilsCacheInterfaceMenu', 10);
 
 $moufManager = MoufManager::getMoufManager();
 $navbar = $moufManager->getInstance("navBar");
