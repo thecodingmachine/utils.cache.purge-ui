@@ -25,7 +25,7 @@ MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOnePurgeableCacheMenuI
 
 $moufManager = MoufManager::getMoufManager();
 $navbar = $moufManager->getInstance("navBar");
-$navbar->children[] = new HtmlFromFile("../../../vendor/mouf/utils.cache.psr6-ui/src/views/purgebutton.php");
+$navbar->children[] = new HtmlFromFile("../../../vendor/mouf/utils.cache.purge-ui/src/views/purgebutton.php");
 
 // Controller declaration
 $moufManager->declareComponent('purgeGlobalCaches', 'Mouf\\Utils\\Cache\\Purge\\Admin\\Controllers\\PurgeCacheController', true);
