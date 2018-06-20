@@ -7,6 +7,7 @@ use Mouf\Html\HtmlElement\HtmlBlock;
 use Mouf\MoufManager;
 use Mouf\Mvc\Splash\Controllers\Controller;
 use Mouf\ClassProxy;
+use Mouf\Utils\Cache\Purge\Service\PurgeCacheService;
 
 /**
  * The controller to purge all caches.
@@ -169,7 +170,7 @@ class PurgeCacheController extends Controller
      */
     public function doPurge($selfedit = 'false')
     {
-        $purgeCacheService = new ClassProxy('Mouf\\Utils\\Cache\\Psr\\Service\\PurgeCacheService');
+        $purgeCacheService = new ClassProxy(PurgeCacheService::class);
         $purgeCacheService->purgeAll();
     }
 }

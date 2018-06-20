@@ -1,5 +1,5 @@
 <form class="navbar-form pull-right" style="margin-right: 5px">
-<button id="menupurgeglobalcache" class="btn btn-warning" data-loading-text="Purging cache..." data-toggle="button"><i class="icon-refresh icon-white"></i> Purge PSR-6 caches</button>
+<button id="menupurgeglobalcache" class="btn btn-warning" data-loading-text="Purging cache..." data-toggle="button"><i class="icon-refresh icon-white"></i> Purge all caches</button>
 <button id="menupurgeglobalcachedone" class="btn btn-success" disabled="disabled" style="display:none"><i class="icon-ok icon-white"></i> All cache purged</button>
 </form>
 <script type="text/javascript">
