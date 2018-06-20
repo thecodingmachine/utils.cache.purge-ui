@@ -10,9 +10,9 @@ jQuery(document).ready(function() {
 
 		var url;
 		if (MoufInstanceManager.selfEdit) {
-			url = MoufInstanceManager.rootUrl+"purgePsr6Caches/doPurge?selfedit=true";
+			url = MoufInstanceManager.rootUrl+"purgeGlobalCaches/doPurge?selfedit=true";
 		} else {
-			url = MoufInstanceManager.rootUrl+"purgePsr6Caches/doPurge?selfedit=false";
+			url = MoufInstanceManager.rootUrl+"purgeGlobalCaches/doPurge?selfedit=false";
 		}
 
 		jQuery.ajax(url)
