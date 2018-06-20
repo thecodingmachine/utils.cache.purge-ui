@@ -25,7 +25,7 @@ class PurgeCacheService
         $compositeException = new CompositeException();
 
         // PSR-6
-        if (\class_exists(CacheItemPoolInterface::class)) {
+        if (\interface_exists(CacheItemPoolInterface::class)) {
             $instances = $moufManager->findInstances(CacheItemPoolInterface::class);
 
             foreach ($instances as $instanceName) {
@@ -55,7 +55,7 @@ class PurgeCacheService
         }
 
         // PSR-16 interface
-        if (\class_exists(CacheInterface::class)) {
+        if (\interface_exists(CacheInterface::class)) {
             $instances = $moufManager->findInstances(CacheInterface::class);
 
             foreach ($instances as $instanceName) {
@@ -71,7 +71,7 @@ class PurgeCacheService
         }
 
         // Doctrine interface
-        if (\class_exists(ClearableCache::class)) {
+        if (\interface_exists(ClearableCache::class)) {
             $instances = $moufManager->findInstances(ClearableCache::class);
 
             foreach ($instances as $instanceName) {
@@ -87,7 +87,7 @@ class PurgeCacheService
         }
 
         // Mouf interface
-        if (\class_exists(MoufCacheInterface::class)) {
+        if (\interface_exists(MoufCacheInterface::class)) {
             $instances = $moufManager->findInstances(MoufCacheInterface::class);
 
             foreach ($instances as $instanceName) {
