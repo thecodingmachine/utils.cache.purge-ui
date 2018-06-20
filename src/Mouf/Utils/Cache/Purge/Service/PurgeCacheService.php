@@ -4,7 +4,7 @@ namespace Mouf\Utils\Cache\Purge\Service;
 
 use Doctrine\Common\Cache\ClearableCache;
 use Mouf\MoufManager;
-use Mouf\Utils\Cache\PurgeableInterface;
+use Mouf\Utils\Cache\Purge\PurgeableInterface;
 use Mouf\Utils\CompositeException;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -25,16 +25,18 @@ class PurgeCacheService
         $compositeException = new CompositeException();
 
         // PSR-6
-        $instances = $moufManager->findInstances(CacheItemPoolInterface::class);
+        if (\class_exists(CacheItemPoolInterface::class)) {
+            $instances = $moufManager->findInstances(CacheItemPoolInterface::class);
 
-        foreach ($instances as $instanceName) {
-            try {
-                $cacheService = $moufManager->getInstance($instanceName);
-                /* @var $cacheService CacheItemPoolInterface */
+            foreach ($instances as $instanceName) {
+                try {
+                    $cacheService = $moufManager->getInstance($instanceName);
+                    /* @var $cacheService CacheItemPoolInterface */
 
-                $cacheService->clear();
-            } catch (\Exception $e) {
-                $compositeException->add($e);
+                    $cacheService->clear();
+                } catch (\Exception $e) {
+                    $compositeException->add($e);
+                }
             }
         }
 
@@ -53,44 +55,50 @@ class PurgeCacheService
         }
 
         // PSR-16 interface
-        $instances = $moufManager->findInstances(CacheInterface::class);
+        if (\class_exists(CacheInterface::class)) {
+            $instances = $moufManager->findInstances(CacheInterface::class);
 
-        foreach ($instances as $instanceName) {
-            try {
-                $cacheService = $moufManager->getInstance($instanceName);
-                /* @var $cacheService CacheInterface */
+            foreach ($instances as $instanceName) {
+                try {
+                    $cacheService = $moufManager->getInstance($instanceName);
+                    /* @var $cacheService CacheInterface */
 
-                $cacheService->clear();
-            } catch (\Exception $e) {
-                $compositeException->add($e);
+                    $cacheService->clear();
+                } catch (\Exception $e) {
+                    $compositeException->add($e);
+                }
             }
         }
 
         // Doctrine interface
-        $instances = $moufManager->findInstances(ClearableCache::class);
+        if (\class_exists(ClearableCache::class)) {
+            $instances = $moufManager->findInstances(ClearableCache::class);
 
-        foreach ($instances as $instanceName) {
-            try {
-                $cacheService = $moufManager->getInstance($instanceName);
-                /* @var $cacheService ClearableCache */
+            foreach ($instances as $instanceName) {
+                try {
+                    $cacheService = $moufManager->getInstance($instanceName);
+                    /* @var $cacheService ClearableCache */
 
-                $cacheService->deleteAll();
-            } catch (\Exception $e) {
-                $compositeException->add($e);
+                    $cacheService->deleteAll();
+                } catch (\Exception $e) {
+                    $compositeException->add($e);
+                }
             }
         }
 
         // Mouf interface
-        $instances = $moufManager->findInstances(MoufCacheInterface::class);
+        if (\class_exists(MoufCacheInterface::class)) {
+            $instances = $moufManager->findInstances(MoufCacheInterface::class);
 
-        foreach ($instances as $instanceName) {
-            try {
-                $cacheService = $moufManager->getInstance($instanceName);
-                /* @var $cacheService MoufCacheInterface */
+            foreach ($instances as $instanceName) {
+                try {
+                    $cacheService = $moufManager->getInstance($instanceName);
+                    /* @var $cacheService MoufCacheInterface */
 
-                $cacheService->purgeAll();
-            } catch (\Exception $e) {
-                $compositeException->add($e);
+                    $cacheService->purgeAll();
+                } catch (\Exception $e) {
+                    $compositeException->add($e);
+                }
             }
         }
 

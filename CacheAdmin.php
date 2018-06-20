@@ -4,7 +4,7 @@ use Doctrine\Common\Cache\ClearableCache;
 use Mouf\Html\HtmlElement\HtmlFromFile;
 use Mouf\MoufManager;
 use Mouf\MoufUtils;
-use Mouf\Utils\Cache\PurgeableInterface;
+use Mouf\Utils\Cache\Purge\PurgeableInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
 
@@ -17,10 +17,18 @@ require_once 'src/Mouf/Utils/Cache/Purge/Admin/Controllers/PurgeCacheController.
 MoufUtils::registerMainMenu('utilsMainMenu', 'Utils', null, 'mainMenu', 200);
 MoufUtils::registerMenuItem('utilsCacheInterfaceMenu', 'Cache management', null, 'utilsMainMenu', 50);
 MoufUtils::registerMenuItem('utilsCacheGlobalPurgeAllCachesMenuItem', 'Purge all cache pools', 'purgeGlobalCaches/', 'utilsCacheInterfaceMenu', 10);
-MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOnePsr6CacheMenuItem', 'Purge a PSR-6 cache instance', 'purgePSR6CacheInstance/', CacheItemPoolInterface::class, 'utilsCacheInterfaceMenu', 10);
-MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOnePsr16CacheMenuItem', 'Purge a PSR-16 cache instance', 'purgePSR16CacheInstance/', CacheInterface::class, 'utilsCacheInterfaceMenu', 20);
-MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOneDoctrineCacheMenuItem', 'Purge a Doctrine cache instance', 'purgeDoctrineCacheInstance/', ClearableCache::class, 'utilsCacheInterfaceMenu', 30);
-MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOneMoufCacheMenuItem', 'Purge a Mouf cache instance', 'purgeMoufCacheInstance/', \Mouf\Utils\Cache\CacheInterface::class, 'utilsCacheInterfaceMenu', 40);
+if (file_exists(__DIR__.'/../../psr/cache')) {
+    MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOnePsr6CacheMenuItem', 'Purge a PSR-6 cache instance', 'purgePSR6CacheInstance/', CacheItemPoolInterface::class, 'utilsCacheInterfaceMenu', 10);
+}
+if (file_exists(__DIR__.'/../../psr/simple-cache')) {
+    MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOnePsr16CacheMenuItem', 'Purge a PSR-16 cache instance', 'purgePSR16CacheInstance/', CacheInterface::class, 'utilsCacheInterfaceMenu', 20);
+}
+if (file_exists(__DIR__.'/../../doctrine/cache')) {
+    MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOneDoctrineCacheMenuItem', 'Purge a Doctrine cache instance', 'purgeDoctrineCacheInstance/', ClearableCache::class, 'utilsCacheInterfaceMenu', 30);
+}
+if (file_exists(__DIR__.'/../../mouf/utils.cache.cache-interface')) {
+    MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOneMoufCacheMenuItem', 'Purge a Mouf cache instance', 'purgeMoufCacheInstance/', \Mouf\Utils\Cache\CacheInterface::class, 'utilsCacheInterfaceMenu', 40);
+}
 MoufUtils::registerChooseInstanceMenuItem('utilsCachePurgeOnePurgeableCacheMenuItem', 'Purge a PurgeableInterface cache instance', 'purgePurgeableCacheInstance/', PurgeableInterface::class, 'utilsCacheInterfaceMenu', 50);
 
 $moufManager = MoufManager::getMoufManager();

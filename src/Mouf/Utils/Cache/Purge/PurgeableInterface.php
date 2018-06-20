@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mouf\Utils\Cache;
+namespace Mouf\Utils\Cache\Purge;
 
 
 interface PurgeableInterface
